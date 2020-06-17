@@ -1,0 +1,182 @@
+
+> typeorm-typescript-example@0.0.1 start D:\Application Data\ble\typescript-example
+> tsc && node src/index.js
+
+table cleared
+DeviceCapacities has been saved:  BleDeviceCapacities {
+  name: 'bleCapacities',
+  detectedSensorId: 1,
+  macAddress: 'FF:FF:FF:FF:FF:FF',
+  pairingStatus: true,
+  rssi: '1111111',
+  sensorType: 'heat'
+}
+Device has been saved:  WebviewDevice {
+  line: 'line1',
+  localisation: 'local1',
+  name: 'BLE1',
+  netId: 'FFFFFFF',
+  networkType: '3P+N',
+  deviceCapacities: [
+    BleDeviceCapacities {
+      name: 'bleCapacities',
+      detectedSensorId: 1,
+      macAddress: 'FF:FF:FF:FF:FF:FF',
+      pairingStatus: true,
+      rssi: '1111111',
+      sensorType: 'heat',
+      id: 1
+    }
+  ],
+  id: 74
+}
+Device has been saved:  WebviewDevice {
+  line: 'line2',
+  localisation: 'local2',
+  name: 'Modbus1',
+  netId: 'AAAAAAA',
+  networkType: '2P+N',
+  deviceCapacities: [
+    ModbusDeviceCapacities {
+      name: 'bleCapacities',
+      ipAddress: '0.0.0.0',
+      modbusAddress: 255,
+      id: 2
+    }
+  ],
+  id: 75
+}
+Device has been saved:  WebviewDevice {
+  line: 'line22',
+  localisation: 'local22',
+  name: 'Modbus2',
+  netId: 'CCCCCCC',
+  networkType: '2P+N',
+  deviceCapacities: [
+    ModbusDeviceCapacities {
+      name: 'modbusCapacities',
+      ipAddress: '0.0.0.0',
+      modbusAddress: 255,
+      id: 3
+    }
+  ],
+  id: 76
+}
+Device has been saved:  WebviewDevice {
+  line: 'line3',
+  localisation: 'local3',
+  name: 'ModbusGeneric1',
+  netId: 'BBBBBBBB',
+  networkType: '3P',
+  deviceCapacities: [
+    ModbusDeviceCapacities {
+      name: 'modbusGenericCapacities',
+      ipAddress: '0.0.0.0',
+      modbusAddress: 255,
+      id: 4
+    }
+  ],
+  id: 77
+}
+Device has been saved:  WebviewDevice {
+  line: 'line4',
+  localisation: 'local4',
+  name: 'ModbusBle1',
+  netId: 'BBBBBBBB',
+  networkType: '3P',
+  deviceCapacities: [
+    ModbusDeviceCapacities {
+      name: 'modbusForBleModbusCapacities',
+      ipAddress: '0.0.0.0',
+      modbusAddress: 255,
+      id: 5
+    },
+    BleDeviceCapacities {
+      name: 'bleCapacitiesForBleModubs',
+      detectedSensorId: 1,
+      macAddress: 'FF:FF:FF:FF:FF:FF',
+      pairingStatus: true,
+      rssi: '1111111',
+      sensorType: 'heat',
+      id: 6
+    }
+  ],
+  id: 78
+}
+Requesting WebviewDevice
+device [
+  WebviewDevice {
+    id: 74,
+    name: 'BLE1',
+    localisation: 'local1',
+    line: 'line1',
+    netId: 'FFFFFFF',
+    networkType: '3P+N',
+    deviceCapacities: [ [AbstractDeviceCapacities] ]
+  },
+  WebviewDevice {
+    id: 75,
+    name: 'Modbus1',
+    localisation: 'local2',
+    line: 'line2',
+    netId: 'AAAAAAA',
+    networkType: '2P+N',
+    deviceCapacities: [ [AbstractDeviceCapacities] ]
+  },
+  WebviewDevice {
+    id: 76,
+    name: 'Modbus2',
+    localisation: 'local22',
+    line: 'line22',
+    netId: 'CCCCCCC',
+    networkType: '2P+N',
+    deviceCapacities: [ [AbstractDeviceCapacities] ]
+  },
+  WebviewDevice {
+    id: 77,
+    name: 'ModbusGeneric1',
+    localisation: 'local3',
+    line: 'line3',
+    netId: 'BBBBBBBB',
+    networkType: '3P',
+    deviceCapacities: [ [AbstractDeviceCapacities] ]
+  },
+  WebviewDevice {
+    id: 78,
+    name: 'ModbusBle1',
+    localisation: 'local4',
+    line: 'line4',
+    netId: 'BBBBBBBB',
+    networkType: '3P',
+    deviceCapacities: [ [AbstractDeviceCapacities], [AbstractDeviceCapacities] ]
+  }
+]
+deviceCapacities of device  74 :  [ AbstractDeviceCapacities { id: 1, name: 'bleCapacities' } ]
+deviceCapacities of device  75 :  [ AbstractDeviceCapacities { id: 2, name: 'bleCapacities' } ]
+deviceCapacities of device  76 :  [ AbstractDeviceCapacities { id: 3, name: 'modbusCapacities' } ]
+deviceCapacities of device  77 :  [ AbstractDeviceCapacities { id: 4, name: 'modbusGenericCapacities' } ]
+deviceCapacities of device  78 :  [
+  AbstractDeviceCapacities {
+    id: 5,
+    name: 'modbusForBleModbusCapacities'
+  },
+  AbstractDeviceCapacities { id: 6, name: 'bleCapacitiesForBleModubs' }
+]
+Requesting AbstractDeviceCapacities
+[
+  AbstractDeviceCapacities { id: 1, name: 'bleCapacities' },
+  AbstractDeviceCapacities { id: 2, name: 'bleCapacities' },
+  AbstractDeviceCapacities { id: 3, name: 'modbusCapacities' },
+  AbstractDeviceCapacities { id: 4, name: 'modbusGenericCapacities' },
+  AbstractDeviceCapacities {
+    id: 5,
+    name: 'modbusForBleModbusCapacities'
+  },
+  AbstractDeviceCapacities { id: 6, name: 'bleCapacitiesForBleModubs' }
+]
+Requesting BleDeviceCapacities
+[]
+Requesting ModbusDeviceCapacities
+[]
+Requesting ModbusGenericDeviceCapacities
+[]
