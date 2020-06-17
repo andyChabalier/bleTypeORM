@@ -1,5 +1,4 @@
-import { Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { AbstractDeviceCapacities } from "./AbstractDeviceCapacities";
+import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export abstract class AbstractDevice {
 
@@ -8,10 +7,4 @@ export abstract class AbstractDevice {
 
     @Column()
     name: string;
-
-    @OneToMany(type => AbstractDeviceCapacities, deviceCapacities => deviceCapacities.abstractDevice, {
-        cascade: true,
-        eager: true
-    })
-    deviceCapacities: AbstractDeviceCapacities[];
 }
