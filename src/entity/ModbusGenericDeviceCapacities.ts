@@ -1,8 +1,8 @@
-import { ChildEntity, Column } from "typeorm";
+import { Column, Entity } from "typeorm";
 import { AbstractDeviceCapacities } from "./AbstractDeviceCapacities";
 import { IModbusGenericCapacities } from "./interfaces/IModbusGenericCapacities";
 
-@ChildEntity()
+@Entity()
 export class ModbusGenericDeviceCapacities extends AbstractDeviceCapacities implements IModbusGenericCapacities {
 
     @Column()

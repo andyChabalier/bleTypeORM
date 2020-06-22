@@ -1,8 +1,8 @@
-import { ChildEntity, Column } from "typeorm";
+import { Column, Entity } from "typeorm";
 import { AbstractDeviceCapacities } from "./AbstractDeviceCapacities";
 import { IBleDeviceCapacities } from "./interfaces/IBleDeviceCapacities";
 
-@ChildEntity()
+@Entity()
 export class BleDeviceCapacities extends AbstractDeviceCapacities implements IBleDeviceCapacities {
     @Column()
     pairingStatus: boolean;

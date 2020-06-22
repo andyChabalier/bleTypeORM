@@ -1,9 +1,8 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IDeviceCapacities } from "./interfaces/IDeviceCapacities";
 import { WebviewDevice } from "./WebviewDevice";
 
 @Entity()
-@TableInheritance({ column: { type: "varchar", name: "type" } })
 export abstract class AbstractDeviceCapacities implements IDeviceCapacities {
 
     @PrimaryGeneratedColumn()
@@ -13,9 +12,12 @@ export abstract class AbstractDeviceCapacities implements IDeviceCapacities {
     name: string;
 
     @Column({ default: null })
+    referenceId: number;
+
+    @Column({ default: null })
     type: string;
 
-    @OneToOne(type => WebviewDevice, abstractDevice => abstractDevice.id, { cascade: false, eager: true })
+    @ManyToOne(type => WebviewDevice, abstractDevice => abstractDevice.id, { eager: true })
     @JoinColumn()
     abstractDevice: WebviewDevice;
 
