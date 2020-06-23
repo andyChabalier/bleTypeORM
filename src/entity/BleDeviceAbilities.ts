@@ -1,9 +1,9 @@
 import { Column, Entity } from "typeorm";
-import { AbstractDeviceCapacities } from "./AbstractDeviceCapacities";
-import { IBleDeviceCapacities } from "./interfaces/IBleDeviceCapacities";
+import { AbstractDeviceAbilities } from "./AbstractDeviceAbilities";
+import { IBleDeviceAbilities } from "./interfaces/IBleDeviceAbilities";
 
 @Entity()
-export class BleDeviceCapacities extends AbstractDeviceCapacities implements IBleDeviceCapacities {
+export class BleDeviceAbilities extends AbstractDeviceAbilities implements IBleDeviceAbilities {
     @Column()
     pairingStatus: boolean;
 

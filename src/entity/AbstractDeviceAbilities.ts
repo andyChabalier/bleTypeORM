@@ -1,9 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { IDeviceCapacities } from "./interfaces/IDeviceCapacities";
+import { IDeviceAbilities } from "./interfaces/IDeviceAbilities";
 import { WebviewDevice } from "./WebviewDevice";
 
 @Entity()
-export abstract class AbstractDeviceCapacities implements IDeviceCapacities {
+export abstract class AbstractDeviceAbilities implements IDeviceAbilities {
 
     @PrimaryGeneratedColumn()
     id: number;

@@ -1,25 +1,25 @@
 import { PrimaryGeneratedColumn, Column, Entity, ManyToOne, JoinColumn } from "typeorm";
 
-export interface IBleDeviceCapacities extends IDeviceCapacities {
+export interface IBleDeviceAbilities extends IDeviceAbilities {
     pairingStatus: boolean;
     detectedSensorId: number;
     rssi: string;
     macAddress: string;
     sensorType: string;
 }
-export interface IDeviceCapacities {
+export interface IDeviceAbilities {
     id: number;
     name: string;
 }
-export interface IGatewayCapacities extends IDeviceCapacities {
+export interface IGatewayAbilities extends IDeviceAbilities {
     ipAddress: string;
     project: string;
 }
-export interface IModbusDeviceCapacities extends IDeviceCapacities {
+export interface IModbusDeviceAbilities extends IDeviceAbilities {
     modbusAddress: number;
     ipAddress: string;
 }
-export interface IModbusGenericCapacities extends IModbusDeviceCapacities {
+export interface IModbusGenericAbilities extends IModbusDeviceAbilities {
     dataEncoding: string;
 }
 export abstract class AbstractDevice {
@@ -31,7 +31,7 @@ export abstract class AbstractDevice {
     name: string;
 }
 @Entity()
-export abstract class AbstractDeviceCapacities implements IDeviceCapacities {
+export abstract class AbstractDeviceAbilities implements IDeviceAbilities {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -66,7 +66,7 @@ export class WebviewDevice extends AbstractDevice {
     networkType: string;
 }
 @Entity()
-export class ModbusDeviceCapacities extends AbstractDeviceCapacities implements IModbusDeviceCapacities {
+export class ModbusDeviceAbilities extends AbstractDeviceAbilities implements IModbusDeviceAbilities {
 
     @Column()
     modbusAddress: number;
@@ -75,7 +75,7 @@ export class ModbusDeviceCapacities extends AbstractDeviceCapacities implements 
     ipAddress: string;
 }
 @Entity()
-export class BleDeviceCapacities extends AbstractDeviceCapacities implements IBleDeviceCapacities {
+export class BleDeviceAbilities extends AbstractDeviceAbilities implements IBleDeviceAbilities {
     @Column()
     pairingStatus: boolean;
 
@@ -92,7 +92,7 @@ export class BleDeviceCapacities extends AbstractDeviceCapacities implements IBl
     sensorType: string;
 }
 @Entity()
-export class ModbusGenericDeviceCapacities extends AbstractDeviceCapacities implements IModbusGenericCapacities {
+export class ModbusGenericDeviceAbilities extends AbstractDeviceAbilities implements IModbusGenericAbilities {
 
     @Column()
     dataEncoding: string;

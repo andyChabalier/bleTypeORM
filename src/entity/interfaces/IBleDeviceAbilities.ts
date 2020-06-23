@@ -1,6 +1,6 @@
-import { IDeviceCapacities } from "./IDeviceCapacities";
+import { IDeviceAbilities } from "./IDeviceAbilities";
 
-export interface IBleDeviceCapacities extends IDeviceCapacities {
+export interface IBleDeviceAbilities extends IDeviceAbilities {
     pairingStatus: boolean;
     detectedSensorId: number;
     rssi: string;

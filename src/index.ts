@@ -1,20 +1,20 @@
 import { createConnection } from "typeorm";
 import { AbstractDevice } from "./entity/AbstractDevice";
-import { AbstractDeviceCapacities } from "./entity/AbstractDeviceCapacities";
-import { BleDeviceCapacities } from "./entity/BleDeviceCapacities";
-import { ModbusDeviceCapacities } from "./entity/ModbusDeviceCapacities";
-import { ModbusGenericDeviceCapacities } from "./entity/ModbusGenericDeviceCapacities";
+import { AbstractDeviceAbilities } from "./entity/AbstractDeviceAbilities";
+import { BleDeviceAbilities } from "./entity/BleDeviceAbilities";
+import { ModbusDeviceAbilities } from "./entity/ModbusDeviceAbilities";
+import { ModbusGenericDeviceAbilities } from "./entity/ModbusGenericDeviceAbilities";
 import { WebviewDevice } from "./entity/WebviewDevice";
-import { SmartDeviceCapacitiesRepository } from "./repository/SmartDeviceCapacitiesRepository";
+import { SmartDeviceAbilitiesRepository } from "./repository/SmartDeviceAbilitiesRepository";
 
 // connection settings are in the "ormconfig.json" file
 createConnection().then(async connection => {
     try {
         const webviewDeviceRepository = connection.getRepository(WebviewDevice);
-        const abstractDeviceCapacitiesRepository = connection.getCustomRepository(SmartDeviceCapacitiesRepository);
-        const bleDeviceCapacitiesRepository = connection.getRepository(BleDeviceCapacities);
-        const modbusDeviceCapacitiesRepository = connection.getRepository(ModbusDeviceCapacities);
-        const modbusGenericDeviceCapacitiesRepository = connection.getRepository(ModbusGenericDeviceCapacities);
+        const abstractDeviceAbilitiesRepository = connection.getCustomRepository(SmartDeviceAbilitiesRepository);
+        const bleDeviceAbilitiesRepository = connection.getRepository(BleDeviceAbilities);
+        const modbusDeviceAbilitiesRepository = connection.getRepository(ModbusDeviceAbilities);
+        const modbusGenericDeviceAbilitiesRepository = connection.getRepository(ModbusGenericDeviceAbilities);
 
         /////////////////////BLE device////////////////////////////
         let bleDevice: WebviewDevice = new WebviewDevice();
@@ -27,17 +27,17 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", bleDevice);
 
-        const bleCapacities = new BleDeviceCapacities();
-        bleCapacities.name = "bleCapacities";
-        bleCapacities.detectedSensorId = 1;
-        bleCapacities.macAddress = "FF:FF:FF:FF:FF:FF";
-        bleCapacities.pairingStatus = true;
-        bleCapacities.rssi = "1111111";
-        bleCapacities.sensorType = "heat";
-        bleCapacities.abstractDevice = bleDevice;
-        await abstractDeviceCapacitiesRepository.createAndSave(bleCapacities, BleDeviceCapacities);
+        const bleAbilities = new BleDeviceAbilities();
+        bleAbilities.name = "bleAbilities";
+        bleAbilities.detectedSensorId = 1;
+        bleAbilities.macAddress = "FF:FF:FF:FF:FF:FF";
+        bleAbilities.pairingStatus = true;
+        bleAbilities.rssi = "1111111";
+        bleAbilities.sensorType = "heat";
+        bleAbilities.abstractDevice = bleDevice;
+        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilities, BleDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", bleCapacities);
+        //console.log("DeviceAbilities has been saved: ", bleAbilities);
 
         let bleDevice2: WebviewDevice = new WebviewDevice();
         bleDevice2.line = "line2";
@@ -49,17 +49,17 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", bleDevice2);
 
-        const bleCapacities2 = new BleDeviceCapacities();
-        bleCapacities2.name = "bleCapacities";
-        bleCapacities2.detectedSensorId = 2;
-        bleCapacities2.macAddress = "FF:FF:FF:FF:FF:FF";
-        bleCapacities2.pairingStatus = true;
-        bleCapacities2.rssi = "1111111";
-        bleCapacities2.sensorType = "heat";
-        bleCapacities2.abstractDevice = bleDevice2;
-        await abstractDeviceCapacitiesRepository.createAndSave(bleCapacities2, BleDeviceCapacities);
+        const bleAbilities2 = new BleDeviceAbilities();
+        bleAbilities2.name = "bleAbilities";
+        bleAbilities2.detectedSensorId = 2;
+        bleAbilities2.macAddress = "FF:FF:FF:FF:FF:FF";
+        bleAbilities2.pairingStatus = true;
+        bleAbilities2.rssi = "1111111";
+        bleAbilities2.sensorType = "heat";
+        bleAbilities2.abstractDevice = bleDevice2;
+        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilities2, BleDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", bleCapacities2);
+        //console.log("DeviceAbilities has been saved: ", bleAbilities2);
 
         ///////////////////Modbus device////////////////////////////
 
@@ -73,14 +73,14 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", modbusDevice);
 
-        const modbusCapacities = new ModbusDeviceCapacities();
-        modbusCapacities.name = "modbusCapacities";
-        modbusCapacities.ipAddress = "0.0.0.0";
-        modbusCapacities.modbusAddress = 255;
-        modbusCapacities.abstractDevice = modbusDevice;
-        await abstractDeviceCapacitiesRepository.createAndSave(modbusCapacities, ModbusDeviceCapacities);
+        const modbusAbilities = new ModbusDeviceAbilities();
+        modbusAbilities.name = "modbusAbilities";
+        modbusAbilities.ipAddress = "0.0.0.0";
+        modbusAbilities.modbusAddress = 255;
+        modbusAbilities.abstractDevice = modbusDevice;
+        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities, ModbusDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", modbusCapacities);
+        //console.log("DeviceAbilities has been saved: ", modbusAbilities);
 
         let modbusDevice2: WebviewDevice = new WebviewDevice();
         modbusDevice2.line = "line22";
@@ -92,14 +92,14 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", modbusDevice2);
 
-        const modbusCapacities2 = new ModbusDeviceCapacities();
-        modbusCapacities2.name = "modbusCapacities2";
-        modbusCapacities2.ipAddress = "0.0.0.0";
-        modbusCapacities2.modbusAddress = 255;
-        modbusCapacities2.abstractDevice = modbusDevice2;
-        await abstractDeviceCapacitiesRepository.createAndSave(modbusCapacities2, ModbusDeviceCapacities);
+        const modbusAbilities2 = new ModbusDeviceAbilities();
+        modbusAbilities2.name = "modbusAbilities2";
+        modbusAbilities2.ipAddress = "0.0.0.0";
+        modbusAbilities2.modbusAddress = 255;
+        modbusAbilities2.abstractDevice = modbusDevice2;
+        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities2, ModbusDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", modbusCapacities2);
+        //console.log("DeviceAbilities has been saved: ", modbusAbilities2);
 
         let modbusDevice3: WebviewDevice = new WebviewDevice();
         modbusDevice3.line = "line23";
@@ -111,14 +111,14 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", modbusDevice3);
 
-        const modbusCapacities3 = new ModbusDeviceCapacities();
-        modbusCapacities3.name = "modbusCapacities3";
-        modbusCapacities3.ipAddress = "0.0.0.0";
-        modbusCapacities3.modbusAddress = 255;
-        modbusCapacities3.abstractDevice = modbusDevice3;
-        await abstractDeviceCapacitiesRepository.createAndSave(modbusCapacities3, ModbusDeviceCapacities);
+        const modbusAbilities3 = new ModbusDeviceAbilities();
+        modbusAbilities3.name = "modbusAbilities3";
+        modbusAbilities3.ipAddress = "0.0.0.0";
+        modbusAbilities3.modbusAddress = 255;
+        modbusAbilities3.abstractDevice = modbusDevice3;
+        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities3, ModbusDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", modbusCapacities3);
+        //console.log("DeviceAbilities has been saved: ", modbusAbilities3);
 
 
         ///////////////////Modbus Generic device//////////////////////////
@@ -133,15 +133,15 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", modbusGenericDevice);
 
-        const modbusGenericCapacities = new ModbusGenericDeviceCapacities();
-        modbusGenericCapacities.name = "modbusGenericCapacities";
-        modbusGenericCapacities.ipAddress = "0.0.0.0";
-        modbusGenericCapacities.modbusAddress = 255;
-        modbusGenericCapacities.abstractDevice = modbusGenericDevice;
-        modbusGenericCapacities.dataEncoding = "inversion";
-        await abstractDeviceCapacitiesRepository.createAndSave(modbusGenericCapacities, ModbusGenericDeviceCapacities);
+        const modbusGenericAbilities = new ModbusGenericDeviceAbilities();
+        modbusGenericAbilities.name = "modbusGenericAbilities";
+        modbusGenericAbilities.ipAddress = "0.0.0.0";
+        modbusGenericAbilities.modbusAddress = 255;
+        modbusGenericAbilities.abstractDevice = modbusGenericDevice;
+        modbusGenericAbilities.dataEncoding = "inversion";
+        await abstractDeviceAbilitiesRepository.createAndSave(modbusGenericAbilities, ModbusGenericDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", modbusGenericCapacities);
+        //console.log("DeviceAbilities has been saved: ", modbusGenericAbilities);
 
         ///////////////////Modbus BLE device//////////////////////////
 
@@ -155,26 +155,26 @@ createConnection().then(async connection => {
 
         //console.log("Device has been saved: ", modbusBleDevice);
 
-        const modbusCapacitiesForBleModbus = new ModbusDeviceCapacities();
-        modbusCapacitiesForBleModbus.name = "modbusForBleModbusCapacities";
-        modbusCapacitiesForBleModbus.ipAddress = "0.0.0.0";
-        modbusCapacitiesForBleModbus.modbusAddress = 255;
-        modbusCapacitiesForBleModbus.abstractDevice = modbusBleDevice;
-        await abstractDeviceCapacitiesRepository.createAndSave(modbusCapacitiesForBleModbus, ModbusDeviceCapacities);
+        const modbusAbilitiesForBleModbus = new ModbusDeviceAbilities();
+        modbusAbilitiesForBleModbus.name = "modbusForBleModbusAbilities";
+        modbusAbilitiesForBleModbus.ipAddress = "0.0.0.0";
+        modbusAbilitiesForBleModbus.modbusAddress = 255;
+        modbusAbilitiesForBleModbus.abstractDevice = modbusBleDevice;
+        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilitiesForBleModbus, ModbusDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", modbusCapacitiesForBleModbus);
+        //console.log("DeviceAbilities has been saved: ", modbusAbilitiesForBleModbus);
 
-        const bleCapacitiesForBleModbus = new BleDeviceCapacities();
-        bleCapacitiesForBleModbus.name = "bleCapacitiesForBleModbus";
-        bleCapacitiesForBleModbus.detectedSensorId = 1;
-        bleCapacitiesForBleModbus.macAddress = "FF:FF:FF:FF:FF:FF";
-        bleCapacitiesForBleModbus.pairingStatus = true;
-        bleCapacitiesForBleModbus.rssi = "1111111";
-        bleCapacitiesForBleModbus.sensorType = "heat";
-        bleCapacitiesForBleModbus.abstractDevice = modbusBleDevice;
-        await abstractDeviceCapacitiesRepository.createAndSave(bleCapacitiesForBleModbus, BleDeviceCapacities);
+        const bleAbilitiesForBleModbus = new BleDeviceAbilities();
+        bleAbilitiesForBleModbus.name = "bleAbilitiesForBleModbus";
+        bleAbilitiesForBleModbus.detectedSensorId = 1;
+        bleAbilitiesForBleModbus.macAddress = "FF:FF:FF:FF:FF:FF";
+        bleAbilitiesForBleModbus.pairingStatus = true;
+        bleAbilitiesForBleModbus.rssi = "1111111";
+        bleAbilitiesForBleModbus.sensorType = "heat";
+        bleAbilitiesForBleModbus.abstractDevice = modbusBleDevice;
+        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilitiesForBleModbus, BleDeviceAbilities);
 
-        //console.log("DeviceCapacities has been saved: ", bleCapacitiesForBleModbus);
+        //console.log("DeviceAbilities has been saved: ", bleAbilitiesForBleModbus);
 
         //////////////////////REQUESTS//////////////////////////////////
 
@@ -184,34 +184,34 @@ createConnection().then(async connection => {
             .then(async result => {
                 result.forEach(async (device: AbstractDevice) => {
                     //console.log(device);
-                    const capacities: AbstractDeviceCapacities[] = await abstractDeviceCapacitiesRepository.findByAbstractDevice(device);
-                    console.log("capacities of device ", device.id, ":", capacities);
+                    const abilities: AbstractDeviceAbilities[] = await abstractDeviceAbilitiesRepository.findByAbstractDevice(device);
+                    console.log("abilities of device ", device.id, ":", abilities);
                 });
             });
 
-        //console.log("//////////////////////Requesting AbstractDeviceCapacities//////////////////////");
-        await abstractDeviceCapacitiesRepository
+        //console.log("//////////////////////Requesting AbstractDeviceAbilities//////////////////////");
+        await abstractDeviceAbilitiesRepository
             .find()
             .then(result => {
                 //console.log(result);
             });
 
-        //console.log("//////////////////////Requesting BleDeviceCapacities//////////////////////");
-        await bleDeviceCapacitiesRepository
+        //console.log("//////////////////////Requesting BleDeviceAbilities//////////////////////");
+        await bleDeviceAbilitiesRepository
             .find()
             .then(result => {
                 //console.log(result);
             });
 
-        //console.log("//////////////////////Requesting ModbusDeviceCapacities//////////////////////");
-        await modbusDeviceCapacitiesRepository
+        //console.log("//////////////////////Requesting ModbusDeviceAbilities//////////////////////");
+        await modbusDeviceAbilitiesRepository
             .find()
             .then(result => {
                 //console.log(result);
             });
 
-        //console.log("//////////////////////Requesting ModbusGenericDeviceCapacities//////////////////////");
-        await modbusGenericDeviceCapacitiesRepository
+        //console.log("//////////////////////Requesting ModbusGenericDeviceAbilities//////////////////////");
+        await modbusGenericDeviceAbilitiesRepository
             .find()
             .then(result => {
                 //console.log(result);
