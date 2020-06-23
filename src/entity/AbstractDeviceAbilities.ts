@@ -12,13 +12,13 @@ export abstract class AbstractDeviceAbilities implements IDeviceAbilities {
     name: string;
 
     @Column({ default: null })
-    referenceId: number;
+    referencedCapacityId: number;
 
     @Column({ default: null })
-    type: string;
+    referencedCapacityType: string;
 
-    @ManyToOne(type => WebviewDevice, abstractDevice => abstractDevice.id)
+    @ManyToOne(type => WebviewDevice, linkedDevice => linkedDevice.id)
     @JoinColumn()
-    abstractDevice: WebviewDevice;
+    linkedDevice: WebviewDevice;
 
 }

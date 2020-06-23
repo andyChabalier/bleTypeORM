@@ -1,17 +1,14 @@
 import { Connection, Repository } from "typeorm";
-import { SmartDeviceAbilitiesRepository } from "./repository/SmartDeviceAbilitiesRepository";
+import { CustomDeviceAbilitiesRepository } from "./repository/customDeviceAbilitiesRepository";
 import { AbstractDeviceAbilities } from "./entity/AbstractDeviceAbilities";
 import { AbstractDevice } from "./entity/AbstractDevice";
 export class AbilitiesDao {
 
-    private abilitiesRepository: SmartDeviceAbilitiesRepository;
 
-    constructor(connection: Connection) {
-        this.abilitiesRepository = connection.getCustomRepository(SmartDeviceAbilitiesRepository);
-    }
+    constructor(private abilitiesRepository: CustomDeviceAbilitiesRepository) { }
 
     public async create<T extends AbstractDeviceAbilities>(ability: T, type: typeof AbstractDeviceAbilities): Promise<void> {
-        this.abilitiesRepository.createAndSave(ability, type);
+        await this.abilitiesRepository.createAndSave(ability, type);
     }
 
     public async getCapacitiesByDevices(device: AbstractDevice): Promise<AbstractDeviceAbilities[]> {
