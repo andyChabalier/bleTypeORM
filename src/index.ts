@@ -6,12 +6,14 @@ import { ModbusDeviceAbilities } from "./entity/ModbusDeviceAbilities";
 import { ModbusGenericDeviceAbilities } from "./entity/ModbusGenericDeviceAbilities";
 import { WebviewDevice } from "./entity/WebviewDevice";
 import { SmartDeviceAbilitiesRepository } from "./repository/SmartDeviceAbilitiesRepository";
+import { AbilitiesDao } from "./AbilitiesDao";
 
 // connection settings are in the "ormconfig.json" file
 createConnection().then(async connection => {
     try {
         const webviewDeviceRepository = connection.getRepository(WebviewDevice);
-        const abstractDeviceAbilitiesRepository = connection.getCustomRepository(SmartDeviceAbilitiesRepository);
+        const abilitiesDao = new AbilitiesDao(connection);
+
         const bleDeviceAbilitiesRepository = connection.getRepository(BleDeviceAbilities);
         const modbusDeviceAbilitiesRepository = connection.getRepository(ModbusDeviceAbilities);
         const modbusGenericDeviceAbilitiesRepository = connection.getRepository(ModbusGenericDeviceAbilities);
@@ -35,7 +37,7 @@ createConnection().then(async connection => {
         bleAbilities.rssi = "1111111";
         bleAbilities.sensorType = "heat";
         bleAbilities.abstractDevice = bleDevice;
-        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilities, BleDeviceAbilities);
+        await abilitiesDao.create(bleAbilities, BleDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", bleAbilities);
 
@@ -57,7 +59,7 @@ createConnection().then(async connection => {
         bleAbilities2.rssi = "1111111";
         bleAbilities2.sensorType = "heat";
         bleAbilities2.abstractDevice = bleDevice2;
-        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilities2, BleDeviceAbilities);
+        await abilitiesDao.create(bleAbilities2, BleDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", bleAbilities2);
 
@@ -78,7 +80,7 @@ createConnection().then(async connection => {
         modbusAbilities.ipAddress = "0.0.0.0";
         modbusAbilities.modbusAddress = 255;
         modbusAbilities.abstractDevice = modbusDevice;
-        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities, ModbusDeviceAbilities);
+        await abilitiesDao.create(modbusAbilities, ModbusDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", modbusAbilities);
 
@@ -97,7 +99,7 @@ createConnection().then(async connection => {
         modbusAbilities2.ipAddress = "0.0.0.0";
         modbusAbilities2.modbusAddress = 255;
         modbusAbilities2.abstractDevice = modbusDevice2;
-        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities2, ModbusDeviceAbilities);
+        await abilitiesDao.create(modbusAbilities2, ModbusDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", modbusAbilities2);
 
@@ -116,7 +118,7 @@ createConnection().then(async connection => {
         modbusAbilities3.ipAddress = "0.0.0.0";
         modbusAbilities3.modbusAddress = 255;
         modbusAbilities3.abstractDevice = modbusDevice3;
-        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilities3, ModbusDeviceAbilities);
+        await abilitiesDao.create(modbusAbilities3, ModbusDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", modbusAbilities3);
 
@@ -139,7 +141,7 @@ createConnection().then(async connection => {
         modbusGenericAbilities.modbusAddress = 255;
         modbusGenericAbilities.abstractDevice = modbusGenericDevice;
         modbusGenericAbilities.dataEncoding = "inversion";
-        await abstractDeviceAbilitiesRepository.createAndSave(modbusGenericAbilities, ModbusGenericDeviceAbilities);
+        await abilitiesDao.create(modbusGenericAbilities, ModbusGenericDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", modbusGenericAbilities);
 
@@ -160,7 +162,7 @@ createConnection().then(async connection => {
         modbusAbilitiesForBleModbus.ipAddress = "0.0.0.0";
         modbusAbilitiesForBleModbus.modbusAddress = 255;
         modbusAbilitiesForBleModbus.abstractDevice = modbusBleDevice;
-        await abstractDeviceAbilitiesRepository.createAndSave(modbusAbilitiesForBleModbus, ModbusDeviceAbilities);
+        await abilitiesDao.create(modbusAbilitiesForBleModbus, ModbusDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", modbusAbilitiesForBleModbus);
 
@@ -172,7 +174,7 @@ createConnection().then(async connection => {
         bleAbilitiesForBleModbus.rssi = "1111111";
         bleAbilitiesForBleModbus.sensorType = "heat";
         bleAbilitiesForBleModbus.abstractDevice = modbusBleDevice;
-        await abstractDeviceAbilitiesRepository.createAndSave(bleAbilitiesForBleModbus, BleDeviceAbilities);
+        await abilitiesDao.create(bleAbilitiesForBleModbus, BleDeviceAbilities);
 
         //console.log("DeviceAbilities has been saved: ", bleAbilitiesForBleModbus);
 
@@ -184,16 +186,9 @@ createConnection().then(async connection => {
             .then(async result => {
                 result.forEach(async (device: AbstractDevice) => {
                     //console.log(device);
-                    const abilities: AbstractDeviceAbilities[] = await abstractDeviceAbilitiesRepository.findByAbstractDevice(device);
+                    const abilities: AbstractDeviceAbilities[] = await abilitiesDao.getCapacitiesByDevices(device);
                     console.log("abilities of device ", device.id, ":", abilities);
                 });
-            });
-
-        //console.log("//////////////////////Requesting AbstractDeviceAbilities//////////////////////");
-        await abstractDeviceAbilitiesRepository
-            .find()
-            .then(result => {
-                //console.log(result);
             });
 
         //console.log("//////////////////////Requesting BleDeviceAbilities//////////////////////");
