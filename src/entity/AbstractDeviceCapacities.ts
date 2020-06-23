@@ -17,7 +17,7 @@ export abstract class AbstractDeviceCapacities implements IDeviceCapacities {
     @Column({ default: null })
     type: string;
 
-    @ManyToOne(type => WebviewDevice, abstractDevice => abstractDevice.id, { eager: true })
+    @ManyToOne(type => WebviewDevice, abstractDevice => abstractDevice.id)
     @JoinColumn()
     abstractDevice: WebviewDevice;
 

@@ -24,13 +24,13 @@ export class SmartDeviceCapacitiesRepository extends Repository<AbstractDeviceCa
      * @returns an array with all capacities. They have all properties from the subtype object
      */
     public async findByAbstractDevice(abstractDevice: AbstractDevice): Promise<AbstractDeviceCapacities[]> {
-        const capacities = await this.find();
+        const capacities = await this.find({ relations: ["abstractDevice"] });
         return Promise.all(capacities
             //Getting the filtered list of capacities linked to the provided abstract device
             .filter((capacity: AbstractDeviceCapacities) => capacity.abstractDevice.id == abstractDevice.id)
             //Fetching the corresponding capacity from subtables
             .map(async (capacity: AbstractDeviceCapacities) => {
-                const fullCapacity: AbstractDeviceCapacities = await this.manager.getRepository(capacity.type).findOne({ id: capacity.referenceId }) as AbstractDeviceCapacities;
+                const fullCapacity: AbstractDeviceCapacities = await this.manager.getRepository(capacity.type).findOne({ id: capacity.referenceId, relations: ["abstractDevice"] }) as AbstractDeviceCapacities;
                 return fullCapacity;
             }));
     }
